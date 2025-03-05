@@ -198,9 +198,9 @@ class ProcessManager {
   private _fixAsarIssue(pi: ProcessOptions): void {
     let electron;
     try {
-        electron = require('electron');
+      electron = require('electron');
     } catch (e) {
-        electron = null;
+      electron = null;
     }
 
     const appPath = electron?.app?.getAppPath() || process.cwd();
@@ -337,8 +337,9 @@ class ProcessManager {
     pi.child.once('close', onExit);
   }
 
+  // Updated restart method: removed the check for pi.child.exitCode to ensure any crash triggers a restart.
   private _restartIfNeeded(pi: ProcessInfo): void {
-    if (pi.stopRequested || (pi.child && pi.child.exitCode === null)) return;
+    if (pi.stopRequested) return;
     const now = Date.now();
     if (now - pi.lastStart > pi.restartOk) {
       pi.restartIndex = 0;
