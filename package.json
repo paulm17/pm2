@@ -1,0 +1,31 @@
+{
+  "name": "@paulm17/pm2",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {      
+      "types": "./dist/index.d.cts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "pnpm run build:dts && node rolldown.js --type cjs && node rolldown.js --type esm && rimraf dist/index.js",
+    "build:dts": "tsup src/index.ts --dts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {   
+    "pidusage": "^4.0.0", 
+    "tree-kill": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}
